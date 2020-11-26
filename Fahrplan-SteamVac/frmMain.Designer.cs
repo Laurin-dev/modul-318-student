@@ -48,10 +48,14 @@ namespace Fahrplan_SteamVac
             this.txtDeparture.Name = "txtDeparture";
             this.txtDeparture.Size = new System.Drawing.Size(215, 39);
             this.txtDeparture.TabIndex = 0;
-            this.txtDeparture.Text = "";
+            this.txtDeparture.Text = "Abfahrtsort";
+            this.txtDeparture.TextChanged += new System.EventHandler(this.TxtDeparture_TextChanged);
+            this.txtDeparture.Enter += new System.EventHandler(this.TxtDeparture_Enter);
+            this.txtDeparture.Leave += new System.EventHandler(this.TxtDeparture_Leave);
             // 
             // DateTimePicker
             // 
+            this.DateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.DateTimePicker.CustomFormat = "MM/dd/yyyy hh:mm";
             this.DateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.DateTimePicker.Location = new System.Drawing.Point(46, 130);
@@ -61,15 +65,20 @@ namespace Fahrplan_SteamVac
             // 
             // txtArrival
             // 
+            this.txtArrival.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtArrival.Location = new System.Drawing.Point(575, 36);
             this.txtArrival.Multiline = false;
             this.txtArrival.Name = "txtArrival";
             this.txtArrival.Size = new System.Drawing.Size(215, 39);
             this.txtArrival.TabIndex = 1;
-            this.txtArrival.Text = "";
+            this.txtArrival.Text = "Ankunftsort";
+            this.txtArrival.TextChanged += new System.EventHandler(this.TxtArrival_TextChanged);
+            this.txtArrival.Enter += new System.EventHandler(this.TxtArrival_Enter);
+            this.txtArrival.Leave += new System.EventHandler(this.TxtArrival_Leave);
             // 
             // btnSearch
             // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.btnSearch.Location = new System.Drawing.Point(304, 124);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(215, 39);
@@ -80,6 +89,7 @@ namespace Fahrplan_SteamVac
             // 
             // btnChangeAD
             // 
+            this.btnChangeAD.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnChangeAD.Location = new System.Drawing.Point(304, 36);
             this.btnChangeAD.Name = "btnChangeAD";
             this.btnChangeAD.Size = new System.Drawing.Size(215, 39);
@@ -90,6 +100,7 @@ namespace Fahrplan_SteamVac
             // 
             // btnDpTable
             // 
+            this.btnDpTable.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnDpTable.Location = new System.Drawing.Point(575, 124);
             this.btnDpTable.Name = "btnDpTable";
             this.btnDpTable.Size = new System.Drawing.Size(120, 39);
@@ -99,6 +110,7 @@ namespace Fahrplan_SteamVac
             // 
             // btnSend
             // 
+            this.btnSend.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnSend.Location = new System.Drawing.Point(734, 124);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(120, 39);
@@ -108,6 +120,7 @@ namespace Fahrplan_SteamVac
             // 
             // lblEmail
             // 
+            this.lblEmail.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblEmail.AutoSize = true;
             this.lblEmail.Location = new System.Drawing.Point(731, 91);
             this.lblEmail.Name = "lblEmail";
@@ -117,6 +130,9 @@ namespace Fahrplan_SteamVac
             // 
             // lstConnections
             // 
+            this.lstConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstConnections.FormattingEnabled = true;
             this.lstConnections.ItemHeight = 16;
             this.lstConnections.Location = new System.Drawing.Point(35, 189);
