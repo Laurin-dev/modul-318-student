@@ -22,14 +22,21 @@ namespace Fahrplan_SteamVac
 
         private void BtnChangeAD_Click(object sender, EventArgs e)
         {
+            if(cboDeparture.Text != "Abfahrtsort" && cboArrival.Text != "Ankunftsort")
+            {
+                string arrival = cboArrival.Text;
+                string departure = cboDeparture.Text;
 
+                cboArrival.Text = departure;
+                cboDeparture.Text = arrival;
+            }
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             try
             {
-                var connections = transport.GetConnections(txtDeparture.Text, txtArrival.Text, 16);
+                var connections = transport.GetConnections(cboDeparture.Text, cboArrival.Text, 16, dtpTime.Value, dtpDate.Value);
 
                 if (connections.ConnectionList.Count != 0)
                 {
@@ -49,45 +56,45 @@ namespace Fahrplan_SteamVac
             }
             catch
             {
-              txtArrival.BackColor = Color.Red;
-              txtDeparture.BackColor = Color.Red;
+              cboArrival.BackColor = Color.Red;
+              cboDeparture.BackColor = Color.Red;
             }
             
         }
 
-        private void TxtDeparture_Enter(object sender, EventArgs e)
+        private void cboDeparture_Enter(object sender, EventArgs e)
         {
-            if (txtDeparture.Text == "Abfahrtsort") {
-                txtDeparture.Text = "";
+            if (cboDeparture.Text == "Abfahrtsort") {
+                cboDeparture.Text = "";
             }
         }
 
-        private void TxtDeparture_Leave(object sender, EventArgs e)
+        private void cboDeparture_Leave(object sender, EventArgs e)
         {
-            if (txtDeparture.Text == "")
+            if (cboDeparture.Text == "")
             {
-                txtDeparture.Text = "Abfahrtsort";
+                cboDeparture.Text = "Abfahrtsort";
             }
         }
 
-        private void TxtArrival_Enter(object sender, EventArgs e)
+        private void cboArrival_Enter(object sender, EventArgs e)
         {
-            if (txtArrival.Text == "Ankunftsort")
+            if (cboArrival.Text == "Ankunftsort")
             {
-                txtArrival.Text = "";
+                cboArrival.Text = "";
             }
         }
 
-        private void TxtArrival_Leave(object sender, EventArgs e)
+        private void cboArrival_Leave(object sender, EventArgs e)
         {
-            if (txtArrival.Text == "")
+            if (cboArrival.Text == "")
             {
-                txtArrival.Text = "Ankunftsort";
+                cboArrival.Text = "Ankunftsort";
             }
         }
 
         private void EnableSearch() {
-            if ((txtArrival.Text == "" || txtArrival.Text == "Ankunftsort") || (txtDeparture.Text == "Abfahrtsort" || txtDeparture.Text == ""))
+            if ((cboArrival.Text == "" || cboArrival.Text == "Ankunftsort") || (cboDeparture.Text == "Abfahrtsort" || cboDeparture.Text == ""))
             {
                 btnSearch.Enabled = false;
             }
@@ -96,12 +103,12 @@ namespace Fahrplan_SteamVac
             }
         }
 
-        private void TxtDeparture_TextChanged(object sender, EventArgs e)
+        private void cboDeparture_TextChanged(object sender, EventArgs e)
         {
             EnableSearch();
         }
 
-        private void TxtArrival_TextChanged(object sender, EventArgs e)
+        private void cboArrival_TextChanged(object sender, EventArgs e)
         {
             EnableSearch();
         }

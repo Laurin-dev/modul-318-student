@@ -30,9 +30,7 @@ namespace Fahrplan_SteamVac
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtDeparture = new System.Windows.Forms.RichTextBox();
-            this.DateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.txtArrival = new System.Windows.Forms.RichTextBox();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnChangeAD = new System.Windows.Forms.Button();
             this.btnDpTable = new System.Windows.Forms.Button();
@@ -45,52 +43,27 @@ namespace Fahrplan_SteamVac
             this.clArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clPanel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpTime = new System.Windows.Forms.DateTimePicker();
+            this.cboDeparture = new System.Windows.Forms.ComboBox();
+            this.cboArrival = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).BeginInit();
             this.SuspendLayout();
             // 
-            // txtDeparture
+            // dtpDate
             // 
-            this.txtDeparture.Location = new System.Drawing.Point(34, 29);
-            this.txtDeparture.Margin = new System.Windows.Forms.Padding(2);
-            this.txtDeparture.Multiline = false;
-            this.txtDeparture.Name = "txtDeparture";
-            this.txtDeparture.Size = new System.Drawing.Size(162, 32);
-            this.txtDeparture.TabIndex = 0;
-            this.txtDeparture.Text = "Abfahrtsort";
-            this.txtDeparture.TextChanged += new System.EventHandler(this.TxtDeparture_TextChanged);
-            this.txtDeparture.Enter += new System.EventHandler(this.TxtDeparture_Enter);
-            this.txtDeparture.Leave += new System.EventHandler(this.TxtDeparture_Leave);
-            // 
-            // DateTimePicker
-            // 
-            this.DateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.DateTimePicker.CustomFormat = "MM/dd/yyyy";
-            this.DateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DateTimePicker.Location = new System.Drawing.Point(34, 105);
-            this.DateTimePicker.Margin = new System.Windows.Forms.Padding(2);
-            this.DateTimePicker.Name = "DateTimePicker";
-            this.DateTimePicker.Size = new System.Drawing.Size(83, 20);
-            this.DateTimePicker.TabIndex = 2;
-            // 
-            // txtArrival
-            // 
-            this.txtArrival.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtArrival.Location = new System.Drawing.Point(431, 29);
-            this.txtArrival.Margin = new System.Windows.Forms.Padding(2);
-            this.txtArrival.Multiline = false;
-            this.txtArrival.Name = "txtArrival";
-            this.txtArrival.Size = new System.Drawing.Size(162, 32);
-            this.txtArrival.TabIndex = 1;
-            this.txtArrival.Text = "Ankunftsort";
-            this.txtArrival.TextChanged += new System.EventHandler(this.TxtArrival_TextChanged);
-            this.txtArrival.Enter += new System.EventHandler(this.TxtArrival_Enter);
-            this.txtArrival.Leave += new System.EventHandler(this.TxtArrival_Leave);
+            this.dtpDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.dtpDate.CustomFormat = "MM/dd/yyyy";
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDate.Location = new System.Drawing.Point(34, 105);
+            this.dtpDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(83, 20);
+            this.dtpDate.TabIndex = 2;
             // 
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btnSearch.Location = new System.Drawing.Point(228, 101);
+            this.btnSearch.Location = new System.Drawing.Point(233, 101);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(161, 32);
@@ -102,7 +75,8 @@ namespace Fahrplan_SteamVac
             // btnChangeAD
             // 
             this.btnChangeAD.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnChangeAD.Location = new System.Drawing.Point(228, 29);
+            this.btnChangeAD.AutoSize = true;
+            this.btnChangeAD.Location = new System.Drawing.Point(233, 29);
             this.btnChangeAD.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangeAD.Name = "btnChangeAD";
             this.btnChangeAD.Size = new System.Drawing.Size(161, 32);
@@ -114,7 +88,7 @@ namespace Fahrplan_SteamVac
             // btnDpTable
             // 
             this.btnDpTable.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnDpTable.Location = new System.Drawing.Point(431, 101);
+            this.btnDpTable.Location = new System.Drawing.Point(440, 101);
             this.btnDpTable.Margin = new System.Windows.Forms.Padding(2);
             this.btnDpTable.Name = "btnDpTable";
             this.btnDpTable.Size = new System.Drawing.Size(90, 32);
@@ -126,7 +100,7 @@ namespace Fahrplan_SteamVac
             // btnSend
             // 
             this.btnSend.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSend.Location = new System.Drawing.Point(550, 101);
+            this.btnSend.Location = new System.Drawing.Point(559, 101);
             this.btnSend.Margin = new System.Windows.Forms.Padding(2);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(90, 32);
@@ -138,7 +112,7 @@ namespace Fahrplan_SteamVac
             // 
             this.lblEmail.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(548, 74);
+            this.lblEmail.Location = new System.Drawing.Point(557, 74);
             this.lblEmail.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(110, 13);
@@ -150,6 +124,7 @@ namespace Fahrplan_SteamVac
             this.dgvConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvConnections.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvConnections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvConnections.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clFrom,
@@ -163,7 +138,7 @@ namespace Fahrplan_SteamVac
             this.dgvConnections.Name = "dgvConnections";
             this.dgvConnections.RowHeadersWidth = 51;
             this.dgvConnections.RowTemplate.Height = 24;
-            this.dgvConnections.Size = new System.Drawing.Size(606, 325);
+            this.dgvConnections.Size = new System.Drawing.Size(615, 325);
             this.dgvConnections.TabIndex = 10;
             // 
             // clFrom
@@ -171,69 +146,80 @@ namespace Fahrplan_SteamVac
             this.clFrom.HeaderText = "Von";
             this.clFrom.MinimumWidth = 6;
             this.clFrom.Name = "clFrom";
-            this.clFrom.Width = 125;
             // 
             // clTo
             // 
             this.clTo.HeaderText = "Nach";
             this.clTo.MinimumWidth = 6;
             this.clTo.Name = "clTo";
-            this.clTo.Width = 125;
             // 
             // clDeparture
             // 
             this.clDeparture.HeaderText = "Abfahrt";
             this.clDeparture.MinimumWidth = 6;
             this.clDeparture.Name = "clDeparture";
-            this.clDeparture.Width = 125;
             // 
             // clArrival
             // 
             this.clArrival.HeaderText = "Ankunft";
             this.clArrival.MinimumWidth = 6;
             this.clArrival.Name = "clArrival";
-            this.clArrival.Width = 125;
             // 
             // clDuration
             // 
             this.clDuration.HeaderText = "Dauer";
             this.clDuration.MinimumWidth = 6;
             this.clDuration.Name = "clDuration";
-            this.clDuration.Width = 125;
             // 
             // clPanel
             // 
             this.clPanel.HeaderText = "Gleis";
             this.clPanel.MinimumWidth = 6;
             this.clPanel.Name = "clPanel";
-            this.clPanel.Width = 125;
             // 
-            // dateTimePicker1
+            // dtpTime
             // 
-            this.dateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dateTimePicker1.CustomFormat = "HH:mm";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(121, 105);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(66, 20);
-            this.dateTimePicker1.TabIndex = 11;
+            this.dtpTime.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.dtpTime.CustomFormat = "HH:mm";
+            this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpTime.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.dtpTime.Location = new System.Drawing.Point(121, 105);
+            this.dtpTime.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpTime.Name = "dtpTime";
+            this.dtpTime.Size = new System.Drawing.Size(66, 20);
+            this.dtpTime.TabIndex = 11;
+            // 
+            // cboDeparture
+            // 
+            this.cboDeparture.FormattingEnabled = true;
+            this.cboDeparture.Location = new System.Drawing.Point(34, 36);
+            this.cboDeparture.Name = "cboDeparture";
+            this.cboDeparture.Size = new System.Drawing.Size(143, 21);
+            this.cboDeparture.TabIndex = 12;
+            // 
+            // cboArrival
+            // 
+            this.cboArrival.FormattingEnabled = true;
+            this.cboArrival.Location = new System.Drawing.Point(440, 36);
+            this.cboArrival.Name = "cboArrival";
+            this.cboArrival.Size = new System.Drawing.Size(143, 21);
+            this.cboArrival.TabIndex = 13;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 495);
-            this.Controls.Add(this.dateTimePicker1);
+            this.ClientSize = new System.Drawing.Size(696, 495);
+            this.Controls.Add(this.cboArrival);
+            this.Controls.Add(this.cboDeparture);
+            this.Controls.Add(this.dtpTime);
             this.Controls.Add(this.dgvConnections);
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.btnDpTable);
             this.Controls.Add(this.btnChangeAD);
             this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.txtArrival);
-            this.Controls.Add(this.DateTimePicker);
-            this.Controls.Add(this.txtDeparture);
+            this.Controls.Add(this.dtpDate);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";
             this.Text = "Fahrplan-SteamVac";
@@ -244,10 +230,7 @@ namespace Fahrplan_SteamVac
         }
 
         #endregion
-
-        private System.Windows.Forms.RichTextBox txtDeparture;
-        private System.Windows.Forms.DateTimePicker DateTimePicker;
-        private System.Windows.Forms.RichTextBox txtArrival;
+        private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnChangeAD;
         private System.Windows.Forms.Button btnDpTable;
@@ -260,7 +243,9 @@ namespace Fahrplan_SteamVac
         private DataGridViewTextBoxColumn clArrival;
         private DataGridViewTextBoxColumn clDuration;
         private DataGridViewTextBoxColumn clPanel;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtpTime;
+        private ComboBox cboDeparture;
+        private ComboBox cboArrival;
     }
 }
 
