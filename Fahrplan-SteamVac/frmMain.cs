@@ -18,6 +18,7 @@ namespace Fahrplan_SteamVac
         {
             InitializeComponent();
             EnableSearch();
+            setAutoComplete();
         }
 
         private void BtnChangeAD_Click(object sender, EventArgs e)
@@ -118,6 +119,33 @@ namespace Fahrplan_SteamVac
             frmAbfahrtstafel frmA = new frmAbfahrtstafel();
 
             frmA.Show();
+        }
+
+        private void CboDeparture_TextChanged_1(object sender, EventArgs e)
+        {
+            if (cboDeparture.Text.Length >= 3) {
+                cboDeparture.Items.Clear();
+                GetSuggestions(cboDeparture.Text);
+                cboDeparture.DroppedDown = true;
+            }
+        }
+
+        private void setAutoComplete()
+        {
+            cboDeparture.AutoCompleteSource = AutoCompleteSource.AllSystemSources;
+            cboDeparture.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboDeparture.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        }
+
+        private void GetSuggestions(string query)
+        {
+            var stations = transport.GetStations(query);
+            AutoCompleteStringCollection data = new AutoCompleteStringCollection();
+
+            foreach (Station station in stations.StationList) {
+                data.Add(station.Name);
+            }
+            cboDeparture.AutoCompleteCustomSource = data;
         }
     }
 }

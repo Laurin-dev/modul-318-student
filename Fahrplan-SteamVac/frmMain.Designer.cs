@@ -196,6 +196,7 @@ namespace Fahrplan_SteamVac
             this.cboDeparture.Name = "cboDeparture";
             this.cboDeparture.Size = new System.Drawing.Size(143, 21);
             this.cboDeparture.TabIndex = 12;
+            this.cboDeparture.TextChanged += new System.EventHandler(this.CboDeparture_TextChanged_1);
             // 
             // cboArrival
             // 
