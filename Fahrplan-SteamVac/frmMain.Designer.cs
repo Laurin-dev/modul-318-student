@@ -38,7 +38,14 @@ namespace Fahrplan_SteamVac
             this.btnDpTable = new System.Windows.Forms.Button();
             this.btnSend = new System.Windows.Forms.Button();
             this.lblEmail = new System.Windows.Forms.Label();
-            this.lstConnections = new System.Windows.Forms.ListBox();
+            this.dgvConnections = new System.Windows.Forms.DataGridView();
+            this.clFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clPanel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).BeginInit();
             this.SuspendLayout();
             // 
             // txtDeparture
@@ -128,24 +135,74 @@ namespace Fahrplan_SteamVac
             this.lblEmail.TabIndex = 8;
             this.lblEmail.Text = "Verbindung via E-Mail";
             // 
-            // lstConnections
+            // dgvConnections
             // 
-            this.lstConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstConnections.FormattingEnabled = true;
-            this.lstConnections.ItemHeight = 16;
-            this.lstConnections.Location = new System.Drawing.Point(35, 189);
-            this.lstConnections.Name = "lstConnections";
-            this.lstConnections.Size = new System.Drawing.Size(819, 388);
-            this.lstConnections.TabIndex = 9;
+            this.dgvConnections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConnections.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clFrom,
+            this.clTo,
+            this.clDeparture,
+            this.clArrival,
+            this.clDuration,
+            this.clPanel});
+            this.dgvConnections.Location = new System.Drawing.Point(46, 197);
+            this.dgvConnections.Name = "dgvConnections";
+            this.dgvConnections.RowHeadersWidth = 51;
+            this.dgvConnections.RowTemplate.Height = 24;
+            this.dgvConnections.Size = new System.Drawing.Size(808, 400);
+            this.dgvConnections.TabIndex = 10;
+            // 
+            // clFrom
+            // 
+            this.clFrom.HeaderText = "Von";
+            this.clFrom.MinimumWidth = 6;
+            this.clFrom.Name = "clFrom";
+            this.clFrom.Width = 125;
+            // 
+            // clTo
+            // 
+            this.clTo.HeaderText = "Nach";
+            this.clTo.MinimumWidth = 6;
+            this.clTo.Name = "clTo";
+            this.clTo.Width = 125;
+            // 
+            // clDeparture
+            // 
+            this.clDeparture.HeaderText = "Abfahrt";
+            this.clDeparture.MinimumWidth = 6;
+            this.clDeparture.Name = "clDeparture";
+            this.clDeparture.Width = 125;
+            // 
+            // clArrival
+            // 
+            this.clArrival.HeaderText = "Ankunft";
+            this.clArrival.MinimumWidth = 6;
+            this.clArrival.Name = "clArrival";
+            this.clArrival.Width = 125;
+            // 
+            // clDuration
+            // 
+            this.clDuration.HeaderText = "Dauer";
+            this.clDuration.MinimumWidth = 6;
+            this.clDuration.Name = "clDuration";
+            this.clDuration.Width = 125;
+            // 
+            // clPanel
+            // 
+            this.clPanel.HeaderText = "Gleis";
+            this.clPanel.MinimumWidth = 6;
+            this.clPanel.Name = "clPanel";
+            this.clPanel.Width = 125;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(916, 609);
-            this.Controls.Add(this.lstConnections);
+            this.Controls.Add(this.dgvConnections);
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.btnDpTable);
@@ -156,6 +213,7 @@ namespace Fahrplan_SteamVac
             this.Controls.Add(this.txtDeparture);
             this.Name = "frmMain";
             this.Text = "Fahrplan-SteamVac";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,7 +229,13 @@ namespace Fahrplan_SteamVac
         private System.Windows.Forms.Button btnDpTable;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.Label lblEmail;
-        private System.Windows.Forms.ListBox lstConnections;
+        private DataGridView dgvConnections;
+        private DataGridViewTextBoxColumn clFrom;
+        private DataGridViewTextBoxColumn clTo;
+        private DataGridViewTextBoxColumn clDeparture;
+        private DataGridViewTextBoxColumn clArrival;
+        private DataGridViewTextBoxColumn clDuration;
+        private DataGridViewTextBoxColumn clPanel;
     }
 }
 

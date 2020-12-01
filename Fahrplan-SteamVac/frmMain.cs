@@ -29,12 +29,12 @@ namespace Fahrplan_SteamVac
         {
             try
             {
-                String sOuput;
                 var connections = _Transport.GetConnections(txtDeparture.Text, txtArrival.Text, 16);
 
-                if (connections.ConnectionList.Count != 0) {
+                if (connections.ConnectionList.Count != 0)
+                {
                     //clear List
-                    lstConnections.Items.Clear();
+                    dgvConnections.Rows.Clear();
 
                     //fill List
                     foreach (Connection connection in connections.ConnectionList)
@@ -43,15 +43,14 @@ namespace Fahrplan_SteamVac
                         DateTime arrivalTime = DateTime.Parse(connection.To.Arrival);
                         TimeSpan duration = TimeSpan.Parse(connection.Duration.Replace("d", ":"));
 
-                        sOuput = "Von " + connection.From.Station.Name + " nach " + connection.To.Station.Name + "\tAbfahrt: " + departureTime.ToString("HH:mm") + " Ankunft: " + arrivalTime.ToString("HH:mm") + "\tDauer: " + duration.ToString(@"hh\:mm") + "\tAbfahrts Gleis: " + connection.From.Platform;
-                        lstConnections.Items.Add(sOuput);
+                        dgvConnections.Rows.Add(new[] { connection.From.Station.Name, connection.To.Station.Name, departureTime.ToString("HH:mm"), arrivalTime.ToString("HH:mm"), duration.ToString(@"hh\:mm"), connection.From.Platform });
                     }
                 }
             }
             catch
             {
-                txtArrival.BackColor = Color.Red;
-                txtArrival.BackColor = Color.Red;
+              txtArrival.BackColor = Color.Red;
+              txtDeparture.BackColor = Color.Red;
             }
             
         }

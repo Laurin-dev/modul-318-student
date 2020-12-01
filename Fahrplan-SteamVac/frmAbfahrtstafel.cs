@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SwissTransport;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,12 @@ namespace Fahrplan_SteamVac
         public frmAbfahrtstafel()
         {
             InitializeComponent();
+        }
+
+        private void TxtSearch_TextChanged(object sender, EventArgs e)
+        {
+            Transport _Transport = new Transport();
+            var Stationboard = _Transport.GetStationBoard(txtSearch.Text, "");
         }
     }
 }
