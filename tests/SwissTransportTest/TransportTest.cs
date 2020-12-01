@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace SwissTransport
 {
@@ -20,7 +21,7 @@ namespace SwissTransport
         public void StationBoard()
         {
             testee = new Transport();
-            var stationBoard = testee.GetStationBoard("Sursee", "8502007");
+            var stationBoard = testee.GetStationBoard("Sursee", "8502007", DateTime.Now);
 
             Assert.IsNotNull(stationBoard);
         }
@@ -29,7 +30,7 @@ namespace SwissTransport
         public void Connections()
         {
             testee = new Transport();
-            var connections = testee.GetConnections("Sursee", "Luzern", 4);
+            var connections = testee.GetConnections("Sursee", "Luzern", 4, DateTime.Now, DateTime.Now);
 
             Assert.IsNotNull(connections);
         }

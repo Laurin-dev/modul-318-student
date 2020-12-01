@@ -13,15 +13,47 @@ namespace Fahrplan_SteamVac
 {
     public partial class frmAbfahrtstafel : Form
     {
+        Transport transport = new Transport();
         public frmAbfahrtstafel()
         {
             InitializeComponent();
         }
 
-        private void TxtSearch_TextChanged(object sender, EventArgs e)
+        private void BtnAnzeigen_Click(object sender, EventArgs e)
         {
-            Transport _Transport = new Transport();
-            var Stationboard = _Transport.GetStationBoard(txtSearch.Text, "");
+            try
+            {
+                dgvAbfahrtstafel.Rows.Clear();
+                var listStationBoardEntries = new List<string[]>();
+                DateTime stationBoardTime = DateTime.Now;
+                Boolean stationBoardBool = true;
+
+                var stationboards = transport.GetStationBoard(txtSearch.Text, "", stationBoardTime);
+
+                while (stationBoardBool)
+                {
+                    foreach (StationBoard stationBoard in stationboards.Entries)
+                    {
+                        string[] stationBoardEntry = new string[] { stationBoard.Stop.Departure.ToString("dd.MM.yyyy HH:mm"), stationBoard.Name, stationBoard.To };
+                        if (listStationBoardEntries.Count == 0 || DateTime.Parse(listStationBoardEntries[listStationBoardEntries.Count - 1][0]) < DateTime.Parse(listStationBoardEntries.First()[0]).AddHours(24.0))
+                        {
+                            dgvAbfahrtstafel.Rows.Add(stationBoardEntry);
+                            listStationBoardEntries.Add(stationBoardEntry);
+                            stationBoardTime = stationBoard.Stop.Departure;
+                        }
+                        else
+                        {
+                            stationBoardBool = false;
+                            break;
+                        }
+                    }
+                    stationboards = transport.GetStationBoard(txtSearch.Text, "", stationBoardTime);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Geben Sie einen gülitigen Ort ein.");
+            }
         }
     }
 }

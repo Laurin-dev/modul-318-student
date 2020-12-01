@@ -13,11 +13,11 @@ namespace Fahrplan_SteamVac
 {
     public partial class frmMain : Form
     {
-        Transport _Transport = new Transport();
+        Transport transport = new Transport();
         public frmMain()
         {
             InitializeComponent();
-            enableSearch();
+            EnableSearch();
         }
 
         private void BtnChangeAD_Click(object sender, EventArgs e)
@@ -29,7 +29,7 @@ namespace Fahrplan_SteamVac
         {
             try
             {
-                var connections = _Transport.GetConnections(txtDeparture.Text, txtArrival.Text, 16);
+                var connections = transport.GetConnections(txtDeparture.Text, txtArrival.Text, 16);
 
                 if (connections.ConnectionList.Count != 0)
                 {
@@ -86,7 +86,7 @@ namespace Fahrplan_SteamVac
             }
         }
 
-        private void enableSearch() {
+        private void EnableSearch() {
             if ((txtArrival.Text == "" || txtArrival.Text == "Ankunftsort") || (txtDeparture.Text == "Abfahrtsort" || txtDeparture.Text == ""))
             {
                 btnSearch.Enabled = false;
@@ -98,12 +98,19 @@ namespace Fahrplan_SteamVac
 
         private void TxtDeparture_TextChanged(object sender, EventArgs e)
         {
-            enableSearch();
+            EnableSearch();
         }
 
         private void TxtArrival_TextChanged(object sender, EventArgs e)
         {
-            enableSearch();
+            EnableSearch();
+        }
+
+        private void BtnDpTable_Click(object sender, EventArgs e)
+        {
+            frmAbfahrtstafel frmA = new frmAbfahrtstafel();
+
+            frmA.Show();
         }
     }
 }
