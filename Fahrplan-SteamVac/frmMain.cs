@@ -22,7 +22,7 @@ namespace Fahrplan_SteamVac
 
         private void BtnChangeAD_Click(object sender, EventArgs e)
         {
-            if(cboDeparture.Text != "Abfahrtsort" && cboArrival.Text != "Ankunftsort")
+            if(cboDeparture.Text != null && cboArrival.Text != null)
             {
                 //Get Text
                 string arrival = cboArrival.Text;
@@ -32,8 +32,14 @@ namespace Fahrplan_SteamVac
                 cboArrival.Text = departure;
                 cboDeparture.Text = arrival;
 
+                //set cursor to waitcursor
+                Cursor.Current = Cursors.WaitCursor;
+
                 //Refresh DataGridView
                 SetDataGridViewData();
+                
+                //resetcursor
+                Cursor.Current = Cursors.Default;
             }
         }
 
@@ -122,7 +128,7 @@ namespace Fahrplan_SteamVac
             }
         }
 
-        private void Combobox_KeyUp(object sender, KeyEventArgs e) {
+        public void Combobox_KeyUp(object sender, KeyEventArgs e) {
             Intelisense intelisense = new Intelisense();
             if (((ComboBox)sender).Text.Length >= 3) {
                 if (e.KeyCode != Keys.Escape)

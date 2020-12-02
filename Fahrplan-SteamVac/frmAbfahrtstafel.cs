@@ -21,6 +21,10 @@ namespace Fahrplan_SteamVac
 
         private void BtnAnzeigen_Click(object sender, EventArgs e)
         {
+            SetDataGridViewInformations();
+        }
+
+        private void SetDataGridViewInformations() {
             try
             {
                 dgvAbfahrtstafel.Rows.Clear();
@@ -29,7 +33,7 @@ namespace Fahrplan_SteamVac
                 Boolean stationBoardBool = true;
 
                 //Get StationBoard from API
-                var stationboards = transport.GetStationBoard(txtSearch.Text, "", stationBoardTime);
+                var stationboards = transport.GetStationBoard(cboSearch.Text, "", stationBoardTime);
 
                 //set cursor to waitcursor
                 Cursor.Current = Cursors.WaitCursor;
@@ -52,7 +56,7 @@ namespace Fahrplan_SteamVac
                             break;
                         }
                     }
-                    stationboards = transport.GetStationBoard(txtSearch.Text, "", stationBoardTime);
+                    stationboards = transport.GetStationBoard(cboSearch.Text, "", stationBoardTime);
                 }
 
                 //resetcursor
@@ -62,6 +66,32 @@ namespace Fahrplan_SteamVac
             {
                 MessageBox.Show("Geben Sie einen gülitigen Ort ein.");
             }
+        }
+
+        private void BtnMap_Click(object sender, EventArgs e)
+        {
+            var location = transport.GetStations(cboSearch.Text);
+            frmMap mapForm = new frmMap(location.StationList[0].Coordinate.XCoordinate, location.StationList[0].Coordinate.YCoordinate);
+
+            SetDataGridViewInformations();
+            mapForm.Show();
+        }
+
+        private void CboSearch_Enter(object sender, EventArgs e)
+        {
+            if(cboSearch.Text == "Suchen") cboSearch.Text = "";
+        }
+
+        private void CboSearch_Leave(object sender, EventArgs e)
+        {
+            if (cboSearch.Text == "") cboSearch.Text = "Suchen";
+        }
+
+        private void CboSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            frmMain mainForm = new frmMain();
+
+            mainForm.Combobox_KeyUp(sender, e);
         }
     }
 }

@@ -28,23 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.dgvAbfahrtstafel = new System.Windows.Forms.DataGridView();
             this.clDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clDescription1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAnzeigen = new System.Windows.Forms.Button();
+            this.btnMap = new System.Windows.Forms.Button();
+            this.cboSearch = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAbfahrtstafel)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(9, 10);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(138, 20);
-            this.txtSearch.TabIndex = 0;
-            this.txtSearch.Text = "Search";
             // 
             // dgvAbfahrtstafel
             // 
@@ -91,30 +83,53 @@
             this.btnAnzeigen.UseVisualStyleBackColor = true;
             this.btnAnzeigen.Click += new System.EventHandler(this.BtnAnzeigen_Click);
             // 
+            // btnMap
+            // 
+            this.btnMap.Location = new System.Drawing.Point(289, 7);
+            this.btnMap.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMap.Name = "btnMap";
+            this.btnMap.Size = new System.Drawing.Size(134, 25);
+            this.btnMap.TabIndex = 2;
+            this.btnMap.Text = "Standort auf Karte";
+            this.btnMap.UseVisualStyleBackColor = true;
+            this.btnMap.Click += new System.EventHandler(this.BtnMap_Click);
+            // 
+            // cboSearch
+            // 
+            this.cboSearch.FormattingEnabled = true;
+            this.cboSearch.Location = new System.Drawing.Point(12, 10);
+            this.cboSearch.Name = "cboSearch";
+            this.cboSearch.Size = new System.Drawing.Size(134, 21);
+            this.cboSearch.TabIndex = 0;
+            this.cboSearch.Text = "Suchen";
+            this.cboSearch.Enter += new System.EventHandler(this.CboSearch_Enter);
+            this.cboSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.CboSearch_KeyUp);
+            this.cboSearch.Leave += new System.EventHandler(this.CboSearch_Leave);
+            // 
             // frmAbfahrtstafel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 454);
+            this.Controls.Add(this.cboSearch);
+            this.Controls.Add(this.btnMap);
             this.Controls.Add(this.btnAnzeigen);
             this.Controls.Add(this.dgvAbfahrtstafel);
-            this.Controls.Add(this.txtSearch);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmAbfahrtstafel";
             this.Text = "Abfahrtstafel-SteamVac";
             ((System.ComponentModel.ISupportInitialize)(this.dgvAbfahrtstafel)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.DataGridView dgvAbfahrtstafel;
         private System.Windows.Forms.DataGridViewTextBoxColumn clDeparture;
         private System.Windows.Forms.DataGridViewTextBoxColumn clLine;
         private System.Windows.Forms.DataGridViewTextBoxColumn clDescription1;
         private System.Windows.Forms.Button btnAnzeigen;
+        private System.Windows.Forms.Button btnMap;
+        private System.Windows.Forms.ComboBox cboSearch;
     }
 }
