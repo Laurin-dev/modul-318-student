@@ -18,25 +18,35 @@ namespace Fahrplan_SteamVac
         {
             InitializeComponent();
             EnableSearch();
-            setAutoComplete();
         }
 
         private void BtnChangeAD_Click(object sender, EventArgs e)
         {
             if(cboDeparture.Text != "Abfahrtsort" && cboArrival.Text != "Ankunftsort")
             {
+                //Get Text
                 string arrival = cboArrival.Text;
                 string departure = cboDeparture.Text;
-
+                
+                //Set new Text
                 cboArrival.Text = departure;
                 cboDeparture.Text = arrival;
+
+                //Refresh DataGridView
+                SetDataGridViewData();
             }
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
+            //Fill/Refresh DataGridView
+            SetDataGridViewData();            
+        }
+
+        private void SetDataGridViewData() {
             try
             {
+                //Get connections from API
                 var connections = transport.GetConnections(cboDeparture.Text, cboArrival.Text, 16, dtpTime.Value, dtpDate.Value);
 
                 if (connections.ConnectionList.Count != 0)
@@ -57,45 +67,14 @@ namespace Fahrplan_SteamVac
             }
             catch
             {
-              cboArrival.BackColor = Color.Red;
-              cboDeparture.BackColor = Color.Red;
-            }
-            
-        }
-
-        private void cboDeparture_Enter(object sender, EventArgs e)
-        {
-            if (cboDeparture.Text == "Abfahrtsort") {
-                cboDeparture.Text = "";
-            }
-        }
-
-        private void cboDeparture_Leave(object sender, EventArgs e)
-        {
-            if (cboDeparture.Text == "")
-            {
-                cboDeparture.Text = "Abfahrtsort";
-            }
-        }
-
-        private void cboArrival_Enter(object sender, EventArgs e)
-        {
-            if (cboArrival.Text == "Ankunftsort")
-            {
-                cboArrival.Text = "";
-            }
-        }
-
-        private void cboArrival_Leave(object sender, EventArgs e)
-        {
-            if (cboArrival.Text == "")
-            {
-                cboArrival.Text = "Ankunftsort";
+                MessageBox.Show("Keine Verbindung gefunden.");
             }
         }
 
         private void EnableSearch() {
-            if ((cboArrival.Text == "" || cboArrival.Text == "Ankunftsort") || (cboDeparture.Text == "Abfahrtsort" || cboDeparture.Text == ""))
+
+            //check wheater or not the comboboxes are empty
+            if (cboArrival.Text == "" || cboDeparture.Text == "")
             {
                 btnSearch.Enabled = false;
             }
@@ -117,35 +96,86 @@ namespace Fahrplan_SteamVac
         private void BtnDpTable_Click(object sender, EventArgs e)
         {
             frmAbfahrtstafel frmA = new frmAbfahrtstafel();
-
+            //Open StationBoard
             frmA.Show();
         }
 
-        private void CboDeparture_TextChanged_1(object sender, EventArgs e)
+        private List<string> GetSuggestions(string query)
         {
-            if (cboDeparture.Text.Length >= 3) {
-                cboDeparture.Items.Clear();
-                GetSuggestions(cboDeparture.Text);
-                cboDeparture.DroppedDown = true;
-            }
-        }
-
-        private void setAutoComplete()
-        {
-            cboDeparture.AutoCompleteSource = AutoCompleteSource.AllSystemSources;
-            cboDeparture.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cboDeparture.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        }
-
-        private void GetSuggestions(string query)
-        {
+            List<string> stationsList = new List<string>();
+            //get all stations with matching string
             var stations = transport.GetStations(query);
-            AutoCompleteStringCollection data = new AutoCompleteStringCollection();
 
             foreach (Station station in stations.StationList) {
-                data.Add(station.Name);
+                //adding stations to combobox
+                stationsList.Add(station.Name);
             }
-            cboDeparture.AutoCompleteCustomSource = data;
+            if (stationsList.Count == 0) {
+                //if Input not valid
+                stationsList.Add("Kein Resultat");
+            }
+            //return stationlist 
+            return stationsList;
+        }
+
+        private void BtnSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dataGridViewlist = new List<string>();
+                foreach (DataGridViewRow row in dgvConnections.SelectedRows)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        dataGridViewlist.Add(cell.Value.ToString());
+                    }
+                }
+                if (dataGridViewlist != null) System.Diagnostics.Process.Start("mailto:" + "?subject=Verbindung" + "&body=Von: " + dataGridViewlist[0] + " Nach: " + dataGridViewlist[1] + ", Abfahrt: "+ dataGridViewlist[2] + " Ankunft: " + dataGridViewlist[3] + ", Gleis: " + dataGridViewlist[4]);
+            }
+            catch {
+                MessageBox.Show("Wählen Sie eine Reihe aus.\n" +
+                    "(In die Spalte ganz links klicken)");
+            }
+        }
+
+        private void Combobox_KeyUp(object sender, KeyEventArgs e) {
+            if (((ComboBox)sender).Text.Length >= 3) {
+                if (e.KeyCode != Keys.Escape)
+                {
+                    if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up && e.KeyCode != Keys.Enter && e.KeyCode != Keys.Left && e.KeyCode != Keys.Right)
+                    {
+                        AutoCompletion((ComboBox)sender);
+                    }
+                }
+                else {
+                    ((ComboBox)sender).DroppedDown = false;
+                }
+            }
+        }
+
+        private void AutoCompletion(ComboBox sender)
+        {
+            while (sender.Items.Count > 0)
+            {
+                sender.Items.RemoveAt(0);
+            }
+
+            //set Cursor Wait
+            Cursor.Current = Cursors.WaitCursor;
+
+            List<string> stations = GetSuggestions(sender.Text);
+
+            //reset Cursor
+            Cursor.Current = Cursors.WaitCursor;
+
+            foreach (String station in stations)
+            {
+                if (station != null)
+                {
+                    sender.Items.Add(station);
+                }
+            }
+            sender.DroppedDown = true;
         }
     }
 }

@@ -28,8 +28,13 @@ namespace Fahrplan_SteamVac
                 DateTime stationBoardTime = DateTime.Now;
                 Boolean stationBoardBool = true;
 
+                //Get StationBoard from API
                 var stationboards = transport.GetStationBoard(txtSearch.Text, "", stationBoardTime);
 
+                //set cursor to waitcursor
+                Cursor.Current = Cursors.WaitCursor;
+
+                //Fill StationBoard
                 while (stationBoardBool)
                 {
                     foreach (StationBoard stationBoard in stationboards.Entries)
@@ -49,6 +54,9 @@ namespace Fahrplan_SteamVac
                     }
                     stationboards = transport.GetStationBoard(txtSearch.Text, "", stationBoardTime);
                 }
+
+                //resetcursor
+                Cursor.Current = Cursors.Default;
             }
             catch
             {

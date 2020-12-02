@@ -46,6 +46,8 @@ namespace Fahrplan_SteamVac
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.cboDeparture = new System.Windows.Forms.ComboBox();
             this.cboArrival = new System.Windows.Forms.ComboBox();
+            this.lblDeparture = new System.Windows.Forms.Label();
+            this.lblArrival = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,7 +69,7 @@ namespace Fahrplan_SteamVac
             this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(161, 32);
-            this.btnSearch.TabIndex = 3;
+            this.btnSearch.TabIndex = 4;
             this.btnSearch.Text = "Verbindung suchen";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
@@ -80,7 +82,7 @@ namespace Fahrplan_SteamVac
             this.btnChangeAD.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangeAD.Name = "btnChangeAD";
             this.btnChangeAD.Size = new System.Drawing.Size(161, 32);
-            this.btnChangeAD.TabIndex = 4;
+            this.btnChangeAD.TabIndex = 5;
             this.btnChangeAD.Text = "An-/Abfahrtsort wechseln";
             this.btnChangeAD.UseVisualStyleBackColor = true;
             this.btnChangeAD.Click += new System.EventHandler(this.BtnChangeAD_Click);
@@ -107,6 +109,7 @@ namespace Fahrplan_SteamVac
             this.btnSend.TabIndex = 7;
             this.btnSend.Text = "Senden";
             this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Click += new System.EventHandler(this.BtnSend_Click);
             // 
             // lblEmail
             // 
@@ -139,7 +142,7 @@ namespace Fahrplan_SteamVac
             this.dgvConnections.RowHeadersWidth = 51;
             this.dgvConnections.RowTemplate.Height = 24;
             this.dgvConnections.Size = new System.Drawing.Size(615, 325);
-            this.dgvConnections.TabIndex = 10;
+            this.dgvConnections.TabIndex = 8;
             // 
             // clFrom
             // 
@@ -187,30 +190,53 @@ namespace Fahrplan_SteamVac
             this.dtpTime.Margin = new System.Windows.Forms.Padding(2);
             this.dtpTime.Name = "dtpTime";
             this.dtpTime.Size = new System.Drawing.Size(66, 20);
-            this.dtpTime.TabIndex = 11;
+            this.dtpTime.TabIndex = 3;
             // 
             // cboDeparture
             // 
             this.cboDeparture.FormattingEnabled = true;
-            this.cboDeparture.Location = new System.Drawing.Point(34, 36);
+            this.cboDeparture.Location = new System.Drawing.Point(34, 40);
             this.cboDeparture.Name = "cboDeparture";
             this.cboDeparture.Size = new System.Drawing.Size(143, 21);
-            this.cboDeparture.TabIndex = 12;
-            this.cboDeparture.TextChanged += new System.EventHandler(this.CboDeparture_TextChanged_1);
+            this.cboDeparture.TabIndex = 0;
+            this.cboDeparture.TextChanged += new System.EventHandler(this.cboDeparture_TextChanged);
+            this.cboDeparture.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Combobox_KeyUp);
             // 
             // cboArrival
             // 
             this.cboArrival.FormattingEnabled = true;
-            this.cboArrival.Location = new System.Drawing.Point(440, 36);
+            this.cboArrival.Location = new System.Drawing.Point(440, 40);
             this.cboArrival.Name = "cboArrival";
             this.cboArrival.Size = new System.Drawing.Size(143, 21);
-            this.cboArrival.TabIndex = 13;
+            this.cboArrival.TabIndex = 1;
+            this.cboArrival.TextChanged += new System.EventHandler(this.cboArrival_TextChanged);
+            this.cboArrival.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Combobox_KeyUp);
+            // 
+            // lblDeparture
+            // 
+            this.lblDeparture.AutoSize = true;
+            this.lblDeparture.Location = new System.Drawing.Point(31, 24);
+            this.lblDeparture.Name = "lblDeparture";
+            this.lblDeparture.Size = new System.Drawing.Size(58, 13);
+            this.lblDeparture.TabIndex = 14;
+            this.lblDeparture.Text = "Abfahrtsort";
+            // 
+            // lblArrival
+            // 
+            this.lblArrival.AutoSize = true;
+            this.lblArrival.Location = new System.Drawing.Point(437, 24);
+            this.lblArrival.Name = "lblArrival";
+            this.lblArrival.Size = new System.Drawing.Size(61, 13);
+            this.lblArrival.TabIndex = 15;
+            this.lblArrival.Text = "Ankunftsort";
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 495);
+            this.Controls.Add(this.lblArrival);
+            this.Controls.Add(this.lblDeparture);
             this.Controls.Add(this.cboArrival);
             this.Controls.Add(this.cboDeparture);
             this.Controls.Add(this.dtpTime);
@@ -247,6 +273,8 @@ namespace Fahrplan_SteamVac
         private DateTimePicker dtpTime;
         private ComboBox cboDeparture;
         private ComboBox cboArrival;
+        private Label lblDeparture;
+        private Label lblArrival;
     }
 }
 
