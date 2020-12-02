@@ -31,7 +31,7 @@ public class Intelisense
         sender.DroppedDown = true;
     }
 
-    private List<string> GetSuggestions(string query)
+    public List<string> GetSuggestions(string query)
     {
         List<string> stationsList = new List<string>();
         //get all stations with matching string
