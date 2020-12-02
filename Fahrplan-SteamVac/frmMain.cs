@@ -100,23 +100,7 @@ namespace Fahrplan_SteamVac
             frmA.Show();
         }
 
-        private List<string> GetSuggestions(string query)
-        {
-            List<string> stationsList = new List<string>();
-            //get all stations with matching string
-            var stations = transport.GetStations(query);
-
-            foreach (Station station in stations.StationList) {
-                //adding stations to combobox
-                stationsList.Add(station.Name);
-            }
-            if (stationsList.Count == 0) {
-                //if Input not valid
-                stationsList.Add("Kein Resultat");
-            }
-            //return stationlist 
-            return stationsList;
-        }
+        
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
@@ -139,43 +123,19 @@ namespace Fahrplan_SteamVac
         }
 
         private void Combobox_KeyUp(object sender, KeyEventArgs e) {
+            Intelisense intelisense = new Intelisense();
             if (((ComboBox)sender).Text.Length >= 3) {
                 if (e.KeyCode != Keys.Escape)
                 {
                     if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up && e.KeyCode != Keys.Enter && e.KeyCode != Keys.Left && e.KeyCode != Keys.Right)
                     {
-                        AutoCompletion((ComboBox)sender);
+                        intelisense.AutoCompletion((ComboBox)sender);
                     }
                 }
                 else {
                     ((ComboBox)sender).DroppedDown = false;
                 }
             }
-        }
-
-        private void AutoCompletion(ComboBox sender)
-        {
-            while (sender.Items.Count > 0)
-            {
-                sender.Items.RemoveAt(0);
-            }
-
-            //set Cursor Wait
-            Cursor.Current = Cursors.WaitCursor;
-
-            List<string> stations = GetSuggestions(sender.Text);
-
-            //reset Cursor
-            Cursor.Current = Cursors.WaitCursor;
-
-            foreach (String station in stations)
-            {
-                if (station != null)
-                {
-                    sender.Items.Add(station);
-                }
-            }
-            sender.DroppedDown = true;
         }
     }
 }
